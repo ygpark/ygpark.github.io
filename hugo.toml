@@ -1,0 +1,80 @@
+baseURL = 'https://ygpark.github.io/'
+languageCode = 'ko-kr'
+title = 'My Hugo Blog'
+theme = 'PaperMod'
+
+# 사이트 메인 설정
+[params]
+  # 메인 배경 이미지 설정
+  featured_image = '/images/hero-background.jpg'
+  # 사이트 설명
+  description = "나만의 멋진 Hugo 블로그"
+  # 메인 페이지 제목 색상 (기본값: #fff)
+  text_color = ""
+  # 최근 포스트 표시 개수
+  recent_posts_number = 3
+  # 소셜 미디어 공유 이미지
+  images = ["/images/site-feature-image.jpg"]
+  # 저자 정보
+  author = "Your Name"
+  # 블로그 소개 텍스트
+  body_classes = "avenir bg-near-white"
+  
+  # PaperMod 검색 기능 활성화
+  ShowSearchPage = true
+  
+# 검색을 위한 출력 형식 설정
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# 메뉴 설정
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 4
+  [[menu.main]]
+    name = "Portfolio"
+    url = "/portfolio/"
+    weight = 5
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 6
+  [[menu.main]]
+    name = "Archives"
+    url = "/archives/"
+    weight = 7
+  [[menu.main]]
+    name = "Search"
+    url = "/search/"
+    weight = 8
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 9
+
+# 소셜 미디어 링크 설정
+[params.ananke_socials]
+  github = "https://github.com/yourusername"
+  twitter = "https://twitter.com/yourusername"
+  instagram = "https://instagram.com/yourusername"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.parser.attribute]
+  block = true
+  title = true

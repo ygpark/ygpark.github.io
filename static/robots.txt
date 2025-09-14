@@ -1,0 +1,28 @@
+User-agent: *
+Allow: /
+
+# Allow access to all pages and content
+Allow: /posts/
+Allow: /categories/
+Allow: /tags/
+Allow: /portfolio/
+Allow: /about/
+Allow: /contact/
+Allow: /archives/
+Allow: /search/
+
+# Disallow admin or private directories if any
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow CSS and JS files for better crawling
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /assets/
+
+# Sitemap location
+Sitemap: https://example.org/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+# Crawl-delay: 1
