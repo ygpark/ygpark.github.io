@@ -1,4 +1,4 @@
-baseURL = 'https://ygpark.github.io/'
+baseURL = 'https://blog.ghostyak.com/'
 languageCode = 'ko-kr'
 title = 'Ghostyak'
 theme = 'PaperMod'
