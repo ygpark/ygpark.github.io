@@ -1,6 +1,6 @@
 baseURL = 'https://ygpark.github.io/'
 languageCode = 'ko-kr'
-title = 'My Hugo Blog'
+title = 'Ghostyak'
 theme = 'PaperMod'
 
 # 사이트 메인 설정
