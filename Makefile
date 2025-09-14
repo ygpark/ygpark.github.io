@@ -6,7 +6,7 @@ BIND ?= 127.0.0.1
 HUGO ?= hugo
 PNPM ?= pnpm
 
-.PHONY: help dev serve build install clean ci-build lint
+.PHONY: help dev serve build install clean ci-build lint link
 
 help:
 	@echo "Makefile targets:"
@@ -17,6 +17,7 @@ help:
 	@echo "  make clean      - remove public/ and resources/_gen/"
 	@echo "  make ci-build   - clean and build (for CI)"
 	@echo "  make lint       - run markdown/html lint if configured"
+	@echo "  make link       - add Google Analytics links to posts"
 
 # Start development server. If you have pnpm scripts (like tailwind/watch), run them first in background.
 dev:
@@ -43,3 +44,6 @@ ci-build: clean
 lint:
 	@echo "No linter configured. Add lint commands to the Makefile or create a pnpm script called 'lint' in package.json."
 	@if [ -f package.json ]; then $(PNPM) run lint || true; fi
+
+link:
+	python3 ./script/add_google_links.py ./content/posts/*.md

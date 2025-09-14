@@ -13,9 +13,11 @@ def convert_headings_to_links(md_text: str) -> str:
 
     def replacer(match):
         title = match.group(1).strip()
+        # '**' 굵게 마크다운 문법 제거
+        title_no_bold = title.replace('**', '')
         # 제목 앞의 넘버링 제거 (예: "1. ", "2) ", "3-", "4." 등)
-        title_without_numbering = re.sub(r'^\d+[\.\)\-\s]+', '', title).strip()
-        query = quote_plus(title_without_numbering)
+        title_clean = re.sub(r'^\d+[\.\)\-\s]+', '', title_no_bold).strip()
+        query = quote_plus(title_clean)
         return f"### [{title}](<https://www.google.com/search?q={query}>)"
 
     # ^### (.*)$ : ### 뒤의 내용을 캡처 (단, 이미 링크가 걸린 경우는 제외)
