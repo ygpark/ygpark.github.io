@@ -49,3 +49,4 @@ PORT=8080 make dev
 ## CI 팁
 
 CI에서는 `make ci-build`를 호출하여 깨끗한 상태에서 빌드하도록 권장합니다.
+'test'
