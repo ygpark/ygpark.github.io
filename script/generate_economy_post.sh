@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/zsh
 
 # 경제 뉴스 포스트 자동 생성 스크립트
 # Claude Code를 이용해 경제 뉴스를 수집하고 Hugo 포스트로 저장
 
 # 스크립트 경로 설정
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 PROMPT_FILE="$SCRIPT_DIR/_prompt_post_economy.md"
 POSTS_DIR="$PROJECT_ROOT/content/posts"
@@ -45,18 +45,45 @@ fi
 # 포스트 디렉토리 생성
 mkdir -p "$POSTS_DIR"
 
-log "Claude Code로 경제 뉴스 수집 중..."
+log "RSS 피드 다운로드 중..."
+
+# RSS 피드 다운로드 스크립트 실행
+"$SCRIPT_DIR/download_rss_feeds.sh" 2>> "$LOG_FILE"
+if [ $? -ne 0 ]; then
+    log "ERROR: RSS 피드 다운로드 실패"
+    exit 1
+fi
+
+RSS_FILE="$SCRIPT_DIR/combined_rss_feeds.xml"
+if [ ! -f "$RSS_FILE" ]; then
+    log "ERROR: RSS 피드 파일을 찾을 수 없습니다: $RSS_FILE"
+    exit 1
+fi
+
+log "Claude Code로 뉴스 분석 중..."
 
 # Claude Code 실행하여 컨텐츠 생성
-# stdin으로 프롬프트를 전달하고, WebSearch 권한을 자동 허용
+# 프롬프트와 RSS 데이터를 함께 전달
 PROMPT_CONTENT=$(cat "$PROMPT_FILE")
-CONTENT=$(cat "$PROMPT_FILE" | claude 2>> "$LOG_FILE")
+RSS_CONTENT=$(cat "$RSS_FILE")
+
+# 프롬프트와 RSS 내용을 결합하여 전달
+COMBINED_INPUT="$PROMPT_CONTENT
+
+=== RSS 피드 데이터 시작 ===
+$RSS_CONTENT
+=== RSS 피드 데이터 끝 ==="
+
+CONTENT=$(echo "$COMBINED_INPUT" | claude 2>> "$LOG_FILE")
 
 # Claude Code 실행 성공 확인
 if [ $? -ne 0 ] || [ -z "$CONTENT" ]; then
     log "ERROR: Claude Code 실행 실패"
     exit 1
 fi
+
+# RSS 피드 파일 정리
+rm -f "$RSS_FILE"
 
 log "컨텐츠 생성 완료"
 

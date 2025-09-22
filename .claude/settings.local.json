@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(./script/download_rss_feeds.sh:*)",
+      "Bash(./script/generate_economy_post.sh:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
