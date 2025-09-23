@@ -1,13 +1,20 @@
 #!/bin/zsh
 
+#SHELL=/bin/zsh
+#HOME="/Users/ghostyak"
+#USER="ghostyak"
+#PATH="/Users/ghostyak/Documents/github/hugo-boilerplate/.venv/bin:/Users/ghostyak/.rbenv/shims:/Users/ghostyak/.nvm/versions/node/v24.4.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Applications/Postgres.app/Contents/Versions/16/bin:/Users/ghostyak/go/bin:/Users/ghostyak/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/ghostyak/.rbenv/shims:/Users/ghostyak/.nvm/versions/node/v24.4.0/bin:/Users/ghostyak/.cargo/bin:/Users/ghostyak/Library/Application Support/Code/User/globalStorage/github.copilot-chat/debugCommand"
+
 # 경제 뉴스 포스트 자동 생성 스크립트
 # Claude Code를 이용해 경제 뉴스를 수집하고 Hugo 포스트로 저장
 
 # 스크립트 경로 설정
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+PROJECT_ROOT="/var/www/hugo-boilerplate"
+SCRIPT_DIR="$PROJECT_ROOT/script"
 PROMPT_FILE="$SCRIPT_DIR/_prompt_post_economy.md"
 POSTS_DIR="$PROJECT_ROOT/content/posts"
+cd "$SCRIPT_DIR" || { echo "프로젝트 디렉토리로 이동 실패"; exit 1; }
+
 
 # 날짜 설정
 DATE=$(date +"%Y-%m-%d")
@@ -74,11 +81,13 @@ COMBINED_INPUT="$PROMPT_CONTENT
 $RSS_CONTENT
 === RSS 피드 데이터 끝 ==="
 
-CONTENT=$(echo "$COMBINED_INPUT" | claude 2>> "$LOG_FILE")
+CONTENT=$(echo "$COMBINED_INPUT" | HOME=/Users/ghostyak /Users/ghostyak/.nvm/versions/node/v24.4.0/bin/claude 2>&1)
+CLAUDE_EXIT_CODE=$?
 
 # Claude Code 실행 성공 확인
-if [ $? -ne 0 ] || [ -z "$CONTENT" ]; then
-    log "ERROR: Claude Code 실행 실패"
+if [ $CLAUDE_EXIT_CODE -ne 0 ] || [ -z "$CONTENT" ]; then
+    log "ERROR: Claude Code 실행 실패 (종료 코드: $CLAUDE_EXIT_CODE)"
+    log "ERROR: Claude Code 출력: $CONTENT"
     exit 1
 fi
 

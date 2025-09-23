@@ -14,16 +14,16 @@ mkdir -p "$TEMP_DIR"
 
 # RSS 피드 URL 목록
 RSS_FEEDS=(
-    "https://www.ft.com/rss/home"
-    "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
-    "https://feeds.bloomberg.com/markets/news.rss"
-    "https://feeds.reuters.com/reuters/businessNews"
-    "http://feeds.marketwatch.com/marketwatch/topstories/"
-    "https://www.cnbc.com/id/100003114/device/rss/rss.html"
-    "https://www.forbes.com/real-time/feed2/"
-    "https://www.economist.com/rss.xml"
-    "http://feeds.bbci.co.uk/news/business/rss.xml"
     "http://rss.cnn.com/rss/money_latest.rss"
+    "https://feeds.bloomberg.com/markets/news.rss"
+    # "https://www.ft.com/rss/home"
+    # "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    # "https://feeds.reuters.com/reuters/businessNews"
+    # "http://feeds.marketwatch.com/marketwatch/topstories/"
+    # "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+    # "https://www.forbes.com/real-time/feed2/"
+    # "https://www.economist.com/rss.xml"
+    # "http://feeds.bbci.co.uk/news/business/rss.xml"
 )
 
 # 시작 태그

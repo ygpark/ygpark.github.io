@@ -1,0 +1,4 @@
+cp ./com.ghostyak.blog.plist ~/Library/LaunchAgents/com.ghostyak.blog.plist
+launchctl unload ~/Library/LaunchAgents/com.ghostyak.blog.plist
+launchctl load ~/Library/LaunchAgents/com.ghostyak.blog.plist
+launchctl list | grep com.ghostyak.blog

@@ -2,16 +2,17 @@
 제공된 RSS 피드 파일(combined_rss_feeds.xml)을 분석해서 경제 뉴스를 찾아서 정리해줘.
 
 파일에는 다음 매체들의 RSS 피드가 포함되어 있다:
-- Financial Times
-- Wall Street Journal
+
 - Bloomberg
+- CNN Money
+<!-- - Financial Times
+- Wall Street Journal
 - Reuters
 - MarketWatch
 - CNBC
 - Forbes
 - The Economist
-- BBC Business
-- CNN Money
+- BBC Business -->
 
 - 한국어로, 신뢰할 만한 매체(예: 로이터, AP, BBC, FT, 블룸버그, 주요 정부/국제기구, 공식 블로그/공지 등)에서 오늘자로 경제에 영향이 있을법한 내용 TOP 10을 찾고, 어떤 영향이 있을지 간결하게 요약한다.
 - 코인, 금, 주식 각 1개 뉴스는 반드시 포함한다. 단, '(코인)' 등 제목에 접두어는 절대 붙이지마.

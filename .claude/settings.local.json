@@ -3,9 +3,16 @@
     "allow": [
       "Bash(chmod:*)",
       "Bash(./script/download_rss_feeds.sh:*)",
-      "Bash(./script/generate_economy_post.sh:*)"
+      "Bash(./script/generate_economy_post.sh:*)",
+      "Read(//Users/ghostyak/.config/**)",
+      "Read(//Users/ghostyak/.claude/plugins/**)",
+      "Read(//Users/ghostyak/Library/Application Support/Claude/**)",
+      "Read(//Users/ghostyak/**)",
+      "Bash(./script/test.sh:*)",
+      "Bash(claude setup-token:*)"
     ],
     "deny": [],
     "ask": []
-  }
+  },
+  "model": "Sonnet"
 }

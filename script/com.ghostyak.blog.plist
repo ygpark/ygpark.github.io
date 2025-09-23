@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.ghostyak.blog</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>/var/www/hugo-boilerplate/script/generate_economy_post.sh</string>
+    </array>
+
+    <!-- 매 1시간마다 실행 60s*60min*24h -->
+    <!-- <key>StartInterval</key>
+    <integer>3600</integer> -->
+
+    <key>StartCalendarInterval</key>
+    <dict>
+      <key>Hour</key>
+      <integer>9</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/Users/ghostyak/.nvm/versions/node/v24.4.0/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/com.ghostyak.blog.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.ghostyak.blog.err</string>
+
+    <!-- <key>RunAtLoad</key>
+    <true/> -->
+  </dict>
+</plist>

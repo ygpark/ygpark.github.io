@@ -10,14 +10,15 @@ PNPM ?= pnpm
 
 help:
 	@echo "Makefile targets:"
-	@echo "  make dev        - start dev server (uses pnpm to run any local scripts then hugo server -D)"
-	@echo "  make serve      - start prod-like server (hugo server --bind $(BIND) --port $(PORT))"
-	@echo "  make build      - build site into ./public"
-	@echo "  make install    - install node deps with pnpm"
-	@echo "  make clean      - remove public/ and resources/_gen/"
-	@echo "  make ci-build   - clean and build (for CI)"
-	@echo "  make lint       - run markdown/html lint if configured"
-	@echo "  make link       - add Google Analytics links to posts"
+	@echo "  make dev          - start dev server (uses pnpm to run any local scripts then hugo server -D)"
+	@echo "  make serve        - start prod-like server (hugo server --bind $(BIND) --port $(PORT))"
+	@echo "  make build        - build site into ./public"
+	@echo "  make install      - install node deps with pnpm"
+	@echo "  make clean        - remove public/ and resources/_gen/"
+	@echo "  make ci-build     - clean and build (for CI)"
+	@echo "  make lint         - run markdown/html lint if configured"
+	@echo "  make link         - add Google Analytics links to posts"
+	@echo "  make setup-daemon - set up launchd daemon for blog generation"
 
 # Start development server. If you have pnpm scripts (like tailwind/watch), run them first in background.
 dev:
@@ -47,3 +48,15 @@ lint:
 
 link:
 	python3 ./script/add_google_links.py ./content/posts/*.md
+
+setup-daemon:
+	@echo "Setting up launchd daemon for blog generation..."
+	@echo "Copying plist file to ~/Library/LaunchAgents/"
+	cp ./script/com.ghostyak.blog.plist ~/Library/LaunchAgents/com.ghostyak.blog.plist
+	@echo "Unloading any existing daemon..."
+	launchctl unload ~/Library/LaunchAgents/com.ghostyak.blog.plist || true
+	@echo "Loading the new daemon..."
+	launchctl load ~/Library/LaunchAgents/com.ghostyak.blog.plist
+	@echo "Daemon setup complete. You can check its status with:"
+	@echo "  launchctl list | grep com.ghostyak.blog"
+	@echo "Logs will be available at /tmp/com.ghostyak.blog.log and /tmp/com.ghostyak.blog.err"
