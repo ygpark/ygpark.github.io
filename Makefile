@@ -49,7 +49,7 @@ lint:
 	@if [ -f package.json ]; then $(PNPM) run lint || true; fi
 
 link:
-	python3 ./script/add_google_links.py ./content/posts/*.md
+	python3 ./script/add_google_links.py ./content/posts/$$(date +"%Y-%m-%d")-economy.md
 
 install-daemon:
 	@echo "Setting up launchd daemon for blog generation..."
@@ -61,7 +61,7 @@ install-daemon:
 
 	@echo "Loading the new daemon..."
 	launchctl load ~/Library/LaunchAgents/com.ghostyak.blog.plist
-	
+
 	@echo "Daemon setup complete. You can check its status with:"
 	@echo "  launchctl list | grep com.ghostyak.blog"
 	@echo "Logs will be available at /tmp/com.ghostyak.blog.log and /tmp/com.ghostyak.blog.err"
