@@ -6,9 +6,9 @@ from urllib.parse import quote_plus
 
 def convert_headings_to_links(md_text: str) -> str:
     """
-    ### 제목  ->  ### [제목](<https://www.google.com/search?q=제목>)
+    ## 제목  ->  ## [제목](<https://www.google.com/search?q=제목>)
     제목이 넘버링되어 있는 경우 숫자를 제거합니다.
-    예: ### 1. 제목  ->  ### [제목](<https://www.google.com/search?q=제목>)
+    예: ## 1. 제목  ->  ## [제목](<https://www.google.com/search?q=제목>)
     """
 
     def replacer(match):
@@ -18,11 +18,11 @@ def convert_headings_to_links(md_text: str) -> str:
         # 제목 앞의 넘버링 제거 (예: "1. ", "2) ", "3-", "4." 등)
         title_clean = re.sub(r'^\d+[\.\)\-\s]+', '', title_no_bold).strip()
         query = quote_plus(title_clean)
-        return f"### [{title}](<https://www.google.com/search?q={query}>)"
+        return f"## [{title}](<https://www.google.com/search?q={query}>)"
 
-    # ^### (.*)$ : ### 뒤의 내용을 캡처 (단, 이미 링크가 걸린 경우는 제외)
-    # 이미 링크가 걸린 제목(### [...]로 시작)은 건드리지 않음
-    return re.sub(r'^### (?!\[)(.+)$', replacer, md_text, flags=re.MULTILINE)
+    # ^## (.*)$ : ## 뒤의 내용을 캡처 (단, 이미 링크가 걸린 경우는 제외)
+    # 이미 링크가 걸린 제목(## [...]로 시작)은 건드리지 않음
+    return re.sub(r'^## (?!\[)(.+)$', replacer, md_text, flags=re.MULTILINE)
 
 def main():
     if len(sys.argv) < 2:
