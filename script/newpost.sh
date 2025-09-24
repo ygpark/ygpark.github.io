@@ -38,7 +38,7 @@ fi
 # Hugo 프론트매터 추가
 cat > "$POST_FILE" << FRONTMATTER
 ---
-title: "${YEAR}년 ${MONTH}월 ${DAY}일 경제 뉴스 TOP 10"
+title: "오늘의 경제 뉴스 TOP 10 - ${YEAR}년 ${MONTH}월 ${DAY}일"
 date: ${DATE}T${TIME}+09:00
 draft: false
 categories:
